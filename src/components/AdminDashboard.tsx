@@ -211,8 +211,15 @@ const AdminDashboard: React.FC = () => {
       <div className="min-h-screen bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50 flex items-center justify-center px-4">
         <div className="bg-white/90 backdrop-blur-sm rounded-2xl md:rounded-3xl shadow-2xl p-6 md:p-10 w-full max-w-md border-2 border-teal-100">
           <div className="text-center mb-6 md:mb-8">
-            <div className="mx-auto w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6 shadow-xl">
-              <Lock className="h-8 w-8 md:h-10 md:w-10 text-white" />
+            <div className="relative mx-auto w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6 shadow-xl overflow-hidden border-2 border-white">
+              <img 
+                src="/logo.jpg" 
+                alt="KAEDRA" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                <Lock className="h-8 w-8 md:h-10 md:w-10 text-white" />
+              </div>
             </div>
             <h1 className="text-2xl md:text-3xl font-bold mb-2 bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent">Admin Access</h1>
             <p className="text-sm md:text-base text-gray-600 flex items-center justify-center gap-2">
@@ -830,8 +837,12 @@ const AdminDashboard: React.FC = () => {
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
           <div className="flex items-center justify-between h-14 md:h-16">
             <div className="flex items-center space-x-2 md:space-x-3">
-              <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-lg md:rounded-xl flex items-center justify-center shadow-lg">
-                <Beaker className="h-4 w-4 md:h-6 md:w-6 text-white" />
+              <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-lg md:rounded-xl flex items-center justify-center shadow-lg overflow-hidden border-2 border-white">
+                <img 
+                  src="/logo.jpg" 
+                  alt="KAEDRA" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <h1 className="text-sm md:text-xl lg:text-2xl font-bold bg-gradient-to-r from-teal-600 via-emerald-600 to-green-600 bg-clip-text text-transparent">
