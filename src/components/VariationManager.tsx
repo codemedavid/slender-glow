@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Plus, Edit, Trash2, Save, X, Package, Image } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Plus, Edit, Trash2, Save, X, Package, Upload } from 'lucide-react';
 import type { Product, ProductVariation } from '../types';
 import { useMenu } from '../hooks/useMenu';
+import { useImageUpload } from '../hooks/useImageUpload';
 
 interface VariationManagerProps {
   product: Product;
@@ -10,6 +11,9 @@ interface VariationManagerProps {
 
 const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose }) => {
   const { addVariation, updateVariation, deleteVariation } = useMenu();
+  const { uploadImage, uploading } = useImageUpload('variation-images');
+  const editFileInputRef = useRef<HTMLInputElement>(null);
+  const newFileInputRef = useRef<HTMLInputElement>(null);
   const [isAdding, setIsAdding] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -152,7 +156,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
           {/* Current Variations */}
           <div className="mb-6">
             <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-              Current Sizes
+              Current Variations
               <span className="text-sm font-normal text-gray-500">
                 ({product.variations?.length || 0} variations)
               </span>
@@ -176,7 +180,7 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                         <div className="grid grid-cols-2 gap-4">
                           <div>
                             <label className="block text-sm font-semibold text-gray-700 mb-2">
-                              Size Name *
+                              Variation Name *
                             </label>
                             <input
                               type="text"
@@ -228,24 +232,55 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                         {/* Image Upload */}
                         <div className="mt-4">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            <Image className="w-4 h-4 inline mr-1" />
                             Variation Image (Optional)
                           </label>
-                          <div className="flex items-start gap-4">
-                            {editingVariation.image_url && (
-                              <img
-                                src={editingVariation.image_url}
-                                alt="Variation"
-                                className="w-20 h-20 object-cover rounded-lg border border-gray-200"
-                              />
+                          <div className="flex items-center gap-3">
+                            {editingVariation.image_url ? (
+                              <div className="relative">
+                                <img
+                                  src={editingVariation.image_url}
+                                  alt="Variation"
+                                  className="w-16 h-16 object-cover rounded-lg border border-gray-200"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => setEditingVariation({ ...editingVariation, image_url: '' })}
+                                  className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full text-xs"
+                                >
+                                  <X className="w-3 h-3" />
+                                </button>
+                              </div>
+                            ) : (
+                              <div
+                                onClick={() => editFileInputRef.current?.click()}
+                                className="w-16 h-16 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-theme-accent transition-colors"
+                              >
+                                {uploading ? (
+                                  <div className="animate-spin w-5 h-5 border-2 border-theme-accent border-t-transparent rounded-full" />
+                                ) : (
+                                  <Upload className="w-5 h-5 text-gray-400" />
+                                )}
+                              </div>
                             )}
                             <input
-                              type="url"
-                              value={editingVariation.image_url}
-                              onChange={(e) => setEditingVariation({ ...editingVariation, image_url: e.target.value })}
-                              placeholder="https://example.com/image.jpg"
-                              className="input-field flex-1"
+                              ref={editFileInputRef}
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={async (e) => {
+                                const file = e.target.files?.[0];
+                                if (file) {
+                                  try {
+                                    const url = await uploadImage(file);
+                                    setEditingVariation({ ...editingVariation, image_url: url });
+                                  } catch (err) {
+                                    alert('Failed to upload image');
+                                  }
+                                }
+                                e.target.value = '';
+                              }}
                             />
+                            <span className="text-xs text-gray-500">Click to upload</span>
                           </div>
                         </div>
 
@@ -329,17 +364,17 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
               className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white rounded-lg font-medium transition-all shadow-md hover:shadow-lg mb-4"
             >
               <Plus className="w-5 h-5" />
-              {isAdding ? 'Cancel' : 'Add New Size'}
+              {isAdding ? 'Cancel' : 'Add New Variation'}
             </button>
 
             {isAdding && (
               <div className="bg-white border-2 border-teal-300 rounded-xl p-6 space-y-4">
-                <h4 className="font-bold text-gray-900 mb-4">New Size Variation</h4>
+                <h4 className="font-bold text-gray-900 mb-4">New Variation</h4>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Size Name *
+                      Variation Name *
                     </label>
                     <input
                       type="text"
@@ -389,27 +424,58 @@ const VariationManager: React.FC<VariationManagerProps> = ({ product, onClose })
                   </div>
                 </div>
 
-                {/* Image URL */}
+                {/* Image Upload */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <Image className="w-4 h-4 inline mr-1" />
-                    Variation Image URL (Optional)
+                    Variation Image (Optional)
                   </label>
-                  <div className="flex items-start gap-4">
-                    {newVariation.image_url && (
-                      <img
-                        src={newVariation.image_url}
-                        alt="Preview"
-                        className="w-16 h-16 object-cover rounded-lg border border-gray-200"
-                      />
+                  <div className="flex items-center gap-3">
+                    {newVariation.image_url ? (
+                      <div className="relative">
+                        <img
+                          src={newVariation.image_url}
+                          alt="Preview"
+                          className="w-16 h-16 object-cover rounded-lg border border-gray-200"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setNewVariation({ ...newVariation, image_url: '' })}
+                          className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full text-xs"
+                        >
+                          <X className="w-3 h-3" />
+                        </button>
+                      </div>
+                    ) : (
+                      <div
+                        onClick={() => newFileInputRef.current?.click()}
+                        className="w-16 h-16 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-theme-accent transition-colors"
+                      >
+                        {uploading ? (
+                          <div className="animate-spin w-5 h-5 border-2 border-theme-accent border-t-transparent rounded-full" />
+                        ) : (
+                          <Upload className="w-5 h-5 text-gray-400" />
+                        )}
+                      </div>
                     )}
                     <input
-                      type="url"
-                      value={newVariation.image_url}
-                      onChange={(e) => setNewVariation({ ...newVariation, image_url: e.target.value })}
-                      placeholder="https://example.com/image.jpg"
-                      className="input-field flex-1"
+                      ref={newFileInputRef}
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          try {
+                            const url = await uploadImage(file);
+                            setNewVariation({ ...newVariation, image_url: url });
+                          } catch (err) {
+                            alert('Failed to upload image');
+                          }
+                        }
+                        e.target.value = '';
+                      }}
                     />
+                    <span className="text-xs text-gray-500">Click to upload</span>
                   </div>
                 </div>
 
