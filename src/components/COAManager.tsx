@@ -34,7 +34,7 @@ const COAManager: React.FC = () => {
     verification_key: '',
     image_url: '/coa/',
     featured: false,
-    manufacturer: 'HP GLOW',
+    manufacturer: 'peptalk.ph',
     laboratory: 'Janoshik Analytical',
   });
 
@@ -224,7 +224,7 @@ const COAManager: React.FC = () => {
       verification_key: '',
       image_url: '/coa/',
       featured: false,
-      manufacturer: 'HP GLOW',
+      manufacturer: 'peptalk.ph',
       laboratory: 'Janoshik Analytical',
     });
   };

@@ -369,7 +369,7 @@ const AdminDashboard: React.FC = () => {
             <div className="relative mx-auto w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-black to-gray-900 rounded-lg md:rounded-xl flex items-center justify-center mb-3 md:mb-4 shadow-lg overflow-hidden border-2 border-gold-500/30">
               <img
                 src="/logo.jpg"
-                alt="HP GLOW"
+                alt="peptalk.ph"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
@@ -1132,13 +1132,13 @@ const AdminDashboard: React.FC = () => {
                 <div className="w-8 h-8 bg-gradient-to-br from-black to-gray-900 rounded-lg flex items-center justify-center shadow-lg overflow-hidden border-2 border-gold-500/30">
                   <img
                     src="/logo.jpg"
-                    alt="HP GLOW"
+                    alt="peptalk.ph"
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div>
                   <h1 className="text-sm md:text-base font-bold bg-gradient-to-r from-black via-gray-900 to-black bg-clip-text text-transparent">
-                    HP GLOW
+                    peptalk.ph
                   </h1>
                   <p className="text-[9px] md:text-[10px] text-gray-600 font-medium flex items-center gap-0.5">
                     <Sparkles className="w-2 h-2 text-gold-500" />

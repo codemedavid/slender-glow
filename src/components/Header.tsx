@@ -30,14 +30,14 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border border-gray-200">
                   <img
                     src="/assets/logo.jpg"
-                    alt="HP GLOW"
+                    alt="peptalk.ph"
                     className="w-full h-full object-cover"
                   />
                 </div>
               </div>
               <div className="text-left min-w-0 flex-1">
                 <h1 className="text-lg sm:text-xl font-bold text-theme-text leading-tight whitespace-nowrap overflow-hidden text-ellipsis tracking-tight">
-                  HP GLOW
+                  peptalk.ph
                 </h1>
                 <p className="text-xs text-gray-500 font-medium flex items-center gap-1">
                   <span className="whitespace-nowrap overflow-hidden text-ellipsis">

@@ -219,7 +219,7 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                   value={formData.account_name}
                   onChange={(e) => setFormData({ ...formData, account_name: e.target.value })}
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gold-300/30 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500 transition-colors"
-                  placeholder="HP GLOW"
+                  placeholder="peptalk.ph"
                 />
               </div>
 
@@ -362,8 +362,8 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
 
                     <div className="flex items-center space-x-2 sm:space-x-3 w-full sm:w-auto justify-end sm:justify-start">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap ${method.active
-                          ? 'bg-gold-100 text-gold-800 border border-gold-300'
-                          : 'bg-gray-100 text-gray-600 border border-gray-300'
+                        ? 'bg-gold-100 text-gold-800 border border-gold-300'
+                        : 'bg-gray-100 text-gray-600 border border-gray-300'
                         }`}>
                         {method.active ? 'Active' : 'Inactive'}
                       </span>
