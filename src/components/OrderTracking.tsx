@@ -211,23 +211,60 @@ const OrderTracking: React.FC = () => {
                                             <div className="space-y-4">
                                                 <div>
                                                     <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">
-                                                        Tracking Number ({order.shipping_provider === 'spx' ? 'SPX Express' : 'J&T Express'})
+                                                        Tracking {order.shipping_provider === 'lbc' ? 'Number' : 'ID'} ({
+                                                            order.shipping_provider === 'lbc' ? 'LBC Express' :
+                                                                order.shipping_provider === 'lalamove' ? 'Lalamove' :
+                                                                    order.shipping_provider === 'maxim' ? 'Maxim' :
+                                                                        order.shipping_provider === 'spx' ? 'SPX Express' : 'J&T Express'
+                                                        })
                                                     </p>
                                                     <p className="text-xl font-mono font-bold text-navy-900 tracking-wide">{order.tracking_number}</p>
                                                 </div>
 
-                                                <a
-                                                    href={order.shipping_provider === 'spx'
-                                                        ? `https://spx.ph/track`
-                                                        : `https://www.jtexpress.ph/trajectoryQuery?bills=${order.tracking_number}`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className={`block w-full py-3 text-white text-center rounded-lg font-bold transition-colors shadow-md hover:shadow-lg flex items-center justify-center gap-2 ${order.shipping_provider === 'spx' ? 'bg-orange-500 hover:bg-orange-600' : 'bg-red-600 hover:bg-red-700'
-                                                        }`}
-                                                >
-                                                    Track on {order.shipping_provider === 'spx' ? 'SPX Express' : 'J&T Express'}
-                                                    <ExternalLink className="w-4 h-4" />
-                                                </a>
+                                                {order.shipping_provider === 'lbc' ? (
+                                                    <a
+                                                        href={`https://www.lbcexpress.com/track/?tracking_no=${order.tracking_number}`}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="block w-full py-3 text-white text-center rounded-lg font-bold transition-colors shadow-md hover:shadow-lg flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700"
+                                                    >
+                                                        Track on LBC Express
+                                                        <ExternalLink className="w-4 h-4" />
+                                                    </a>
+                                                ) : order.shipping_provider === 'lalamove' ? (
+                                                    <a
+                                                        href="https://web.lalamove.com/"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="block w-full py-3 text-white text-center rounded-lg font-bold transition-colors shadow-md hover:shadow-lg flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600"
+                                                    >
+                                                        Open Lalamove App/Web
+                                                        <ExternalLink className="w-4 h-4" />
+                                                    </a>
+                                                ) : order.shipping_provider === 'maxim' ? (
+                                                    <a
+                                                        href="https://taximaxim.com/"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="block w-full py-3 text-white text-center rounded-lg font-bold transition-colors shadow-md hover:shadow-lg flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-black"
+                                                    >
+                                                        Open Maxim App/Web
+                                                        <ExternalLink className="w-4 h-4" />
+                                                    </a>
+                                                ) : (
+                                                    <a
+                                                        href={order.shipping_provider === 'spx'
+                                                            ? `https://spx.ph/track`
+                                                            : `https://www.jtexpress.ph/trajectoryQuery?bills=${order.tracking_number}`}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className={`block w-full py-3 text-white text-center rounded-lg font-bold transition-colors shadow-md hover:shadow-lg flex items-center justify-center gap-2 ${order.shipping_provider === 'spx' ? 'bg-orange-500 hover:bg-orange-600' : 'bg-red-600 hover:bg-red-700'
+                                                            }`}
+                                                    >
+                                                        Track on {order.shipping_provider === 'spx' ? 'SPX Express' : 'J&T Express'}
+                                                        <ExternalLink className="w-4 h-4" />
+                                                    </a>
+                                                )}
                                             </div>
                                         ) : (
                                             <div className="text-center py-4 text-gray-500">

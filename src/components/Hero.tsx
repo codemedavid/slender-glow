@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Shield, ChevronRight, Leaf, Scale, Heart } from 'lucide-react';
+import { useCOAPageSetting } from '../hooks/useCOAPageSetting';
 
 interface HeroProps {
   onShopAll: () => void;
@@ -7,6 +8,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const { coaPageEnabled } = useCOAPageSetting();
 
   useEffect(() => {
     setIsVisible(true);
@@ -268,14 +270,16 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
             </button>
 
-            <a
-              href="/coa"
-              className="group flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold text-sm text-deep-blue-500 hover:text-teal-600 border border-deep-blue-200 hover:border-teal-400 hover:bg-teal-50 transition-all duration-300 w-full sm:w-auto"
-            >
-              <Shield className="w-4 h-4" />
-              View Lab Reports
-              <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            {coaPageEnabled && (
+              <a
+                href="/coa"
+                className="group flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-semibold text-sm text-deep-blue-500 hover:text-teal-600 border border-deep-blue-200 hover:border-teal-400 hover:bg-teal-50 transition-all duration-300 w-full sm:w-auto"
+              >
+                <Shield className="w-4 h-4" />
+                View Lab Reports
+                <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
+            )}
           </div>
 
           {/* Feature Cards */}

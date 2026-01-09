@@ -676,21 +676,20 @@ const OrderDetailsView: React.FC<OrderDetailsViewProps> = ({
                     onChange={(e) => setShippingProvider(e.target.value)}
                     className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-black bg-white"
                   >
-                    <option value="jnt">J&T Express</option>
-                    <option value="spx">SPX Express</option>
+                    <option value="lbc">LBC Express</option>
+                    <option value="lalamove">Lalamove</option>
+                    <option value="maxim">Maxim</option>
                   </select>
                   <input
                     type="text"
                     value={trackingNumber}
                     onChange={(e) => setTrackingNumber(e.target.value)}
-                    placeholder="e.g., 78XXXX..."
+                    placeholder={shippingProvider === 'lbc' ? "e.g., 123456789012" : "See App for details"}
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-black"
                   />
-                  {trackingNumber && (
+                  {trackingNumber && shippingProvider === 'lbc' && (
                     <a
-                      href={shippingProvider === 'spx'
-                        ? `https://spx.ph/track`
-                        : `https://www.jtexpress.ph/trajectoryQuery?bills=${trackingNumber}`}
+                      href={`https://www.lbcexpress.com/track/?tracking_no=${trackingNumber}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-3 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 flex items-center justify-center"
