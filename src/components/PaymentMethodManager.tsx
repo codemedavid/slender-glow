@@ -64,25 +64,22 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
   };
 
   const handleSaveMethod = async () => {
-    if (!formData.id || !formData.name || !formData.account_number || !formData.account_name) {
-      alert('Please fill in all required fields (ID, Name, Account Number, and Account Name)');
+    if (!formData.name || !formData.account_number || !formData.account_name) {
+      alert('Please fill in all required fields (Name, Account Number, and Account Name)');
       return;
     }
 
     // QR code is optional - if missing, a placeholder will be used
     // (Database requires NOT NULL, so we use a placeholder image)
 
-    // Validate ID format (kebab-case)
-    const idRegex = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-    if (!idRegex.test(formData.id)) {
-      alert('Payment method ID must be in kebab-case format (e.g., "gcash", "bank-transfer")');
-      return;
-    }
-
     try {
+      // Generate UUID for new payment methods
+      const methodId = editingMethod ? editingMethod.id : crypto.randomUUID();
+
       // Prepare data for saving - ensure qr_code_url is properly formatted
       const saveData = {
         ...formData,
+        id: methodId,
         qr_code_url: formData.qr_code_url?.trim() || '', // Normalize qr_code_url
       };
 
@@ -113,20 +110,10 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
     setEditingMethod(null);
   };
 
-  const generateIdFromName = (name: string) => {
-    return name
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .trim();
-  };
-
   const handleNameChange = (name: string) => {
     setFormData({
       ...formData,
-      name,
-      id: currentView === 'add' ? generateIdFromName(name) : formData.id
+      name
     });
   };
 
@@ -181,24 +168,6 @@ const PaymentMethodManager: React.FC<PaymentMethodManagerProps> = ({ onBack }) =
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-gray-900 transition-colors text-gray-900"
                   placeholder="e.g., GCash, Maya, Bank Transfer"
                 />
-              </div>
-
-              <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-900 mb-1.5 sm:mb-2">Method ID *</label>
-                <input
-                  type="text"
-                  value={formData.id}
-                  onChange={(e) => setFormData({ ...formData, id: e.target.value })}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-gray-900 transition-colors disabled:bg-gray-50 text-gray-900"
-                  placeholder="kebab-case-id"
-                  disabled={currentView === 'edit'}
-                />
-                <p className="text-xs text-gray-500 mt-1">
-                  {currentView === 'edit'
-                    ? 'Method ID cannot be changed after creation'
-                    : 'Use kebab-case format (e.g., "gcash", "bank-transfer")'
-                  }
-                </p>
               </div>
 
               <div>
