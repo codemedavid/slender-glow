@@ -191,10 +191,10 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
               href="https://m.me/61585973522665"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-tech-teal transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-full shadow-md hover:shadow-lg transition-all duration-300"
             >
-              <span className="w-2 h-2 bg-tech-teal rounded-full animate-pulse" />
-              For rush orders, please contact us
+              <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
+              For Rush Orders, Contact Us
             </a>
           </div>
 
