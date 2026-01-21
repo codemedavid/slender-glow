@@ -20,11 +20,13 @@ CREATE TABLE categories (
 );
 
 -- 3. Insert Clean Categories (No Icons)
+-- Added 'addons' for supplies/accessories
 INSERT INTO categories (id, name, sort_order, active, icon) VALUES
 ('research', 'Research & Weight Management', 1, true, NULL),
 ('cosmetic', 'Cosmetic & Anti-Aging', 2, true, NULL),
 ('performance', 'Performance & Longevity', 3, true, NULL),
-('healing', 'Healing & Recovery', 4, true, NULL);
+('healing', 'Healing & Recovery', 4, true, NULL),
+('addons', 'supplies & Add-ons', 5, true, NULL);
 
 -- 4. Update existing products to map to new Categories
 -- We need to ensure products table is loose enough or we update it first
@@ -55,6 +57,7 @@ UPDATE products SET category = 'performance' WHERE category = 'wellness';
 UPDATE products SET category = 'performance' WHERE name ILIKE '%NAD+%';
 UPDATE products SET category = 'performance' WHERE name ILIKE '%MOTS-c%';
 UPDATE products SET category = 'performance' WHERE name ILIKE '%AOD%';
+UPDATE products SET category = 'performance' WHERE name ILIKE '%5-amino%';
 UPDATE products SET category = 'performance' WHERE name ILIKE '%SS-31%';
 
 UPDATE products SET category = 'healing' WHERE category = 'recovery';
@@ -64,6 +67,12 @@ UPDATE products SET category = 'healing' WHERE name ILIKE '%Thymosin%';
 UPDATE products SET category = 'healing' WHERE name ILIKE '%ARA-290%';
 UPDATE products SET category = 'healing' WHERE name ILIKE '%KPV%';
 
+-- Map Accessories/Supplies to 'addons'
+UPDATE products SET category = 'addons' WHERE name ILIKE '%Pen%'; -- Covers 'Disposable Pen', 'Candy Pen', 'Pen Needles'
+UPDATE products SET category = 'addons' WHERE name ILIKE '%Cartridge%'; -- Covers 'Cartridge Sterilized', 'Cartridge Purger'
+UPDATE products SET category = 'addons' WHERE name ILIKE '%Water%'; -- Covers 'Hospital Grade Water'
+UPDATE products SET category = 'addons' WHERE name ILIKE '%V1%';
+UPDATE products SET category = 'addons' WHERE name ILIKE '%Needle%';
 
 -- 5. Restore Foreign Key (Optional, but good for integrity)
 -- Now that both sides are TEXT, we can link them.
