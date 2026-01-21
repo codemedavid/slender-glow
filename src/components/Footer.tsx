@@ -12,8 +12,8 @@ const Footer: React.FC = () => {
           {/* Brand Section */}
           <div className="flex flex-col items-center md:items-start gap-4">
             <img
-              src="/glow-logo.jpg"
-              alt="Glow with Joo"
+              src="/logo.png"
+              alt="Slender Glow"
               className="h-14 w-auto object-contain bg-white/10 rounded-lg p-2"
             />
             <p className="text-charcoal-400 text-sm max-w-xs text-center md:text-left">
@@ -87,7 +87,7 @@ const Footer: React.FC = () => {
           <p className="text-xs text-charcoal-500 flex items-center justify-center gap-1">
             Made with
             <Heart className="w-3 h-3 text-blush-400" fill="currentColor" />
-            © {currentYear} Glow with Joo.
+            © {currentYear} Slender Glow.
           </p>
         </div>
       </div>

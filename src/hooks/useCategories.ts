@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabase';
 export interface Category {
   id: string;
   name: string;
-  icon: string;
+  icon?: string | null;
   sort_order: number;
   active: boolean;
   created_at: string;

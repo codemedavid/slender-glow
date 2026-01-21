@@ -13,6 +13,7 @@ export interface Protocol {
     sort_order: number;
     active: boolean;
     product_id?: string;
+    image_url?: string;
     created_at: string;
     updated_at: string;
 }

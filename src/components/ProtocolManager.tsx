@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Plus, Edit, Trash2, Save, X, Eye, EyeOff } from 'lucide-react';
 import { useProtocols, Protocol } from '../hooks/useProtocols';
+import ImageUpload from './ImageUpload';
 
 interface ProtocolManagerProps {
     onBack: () => void;
@@ -21,7 +22,8 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
         notes: [] as string[],
         storage: '',
         sort_order: 0,
-        active: true
+        active: true,
+        image_url: ''
     };
 
     const [formData, setFormData] = useState(emptyForm);
@@ -38,7 +40,8 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
             notes: protocol.notes,
             storage: protocol.storage,
             sort_order: protocol.sort_order,
-            active: protocol.active
+            active: protocol.active,
+            image_url: protocol.image_url || ''
         });
         setNotesText(protocol.notes.join('\n'));
         setIsAdding(false);
@@ -152,6 +155,16 @@ const ProtocolManager: React.FC<ProtocolManagerProps> = ({ onBack }) => {
                         <h2 className="text-lg font-bold text-gray-900 mb-4">
                             {isAdding ? '➕ Add New Protocol' : '✏️ Edit Protocol'}
                         </h2>
+
+                        <div className="mb-6">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Protocol Guide Image (Optional)</label>
+                            <ImageUpload
+                                currentImage={formData.image_url}
+                                onImageChange={(url) => setFormData({ ...formData, image_url: url || '' })}
+                                folder="protocol-images"
+                            />
+                            <p className="text-xs text-gray-500 mt-1">Upload a detailed visual guide or chart (e.g., injection mapping, dosage chart).</p>
+                        </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>

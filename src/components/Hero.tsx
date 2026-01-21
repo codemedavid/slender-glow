@@ -51,22 +51,22 @@ const Hero: React.FC<HeroProps> = ({ onShopAll }) => {
           {/* Logo Brand */}
           <div className="mb-8 md:mb-10">
             <img
-              src="/glow-logo.jpg"
-              alt="Glow with Joo"
+              src="/logo.png"
+              alt="Slender Glow"
               className="h-24 md:h-32 w-auto mx-auto object-contain drop-shadow-md rounded-xl"
             />
           </div>
 
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 border border-white shadow-sm mb-6">
-            <FlaskConical className="w-3.5 h-3.5 text-blush-600" />
+            <FlaskConical className="w-3.5 h-3.5 text-blush-800" />
             <span className="text-xs font-bold text-charcoal-600 tracking-widest uppercase">Premium Grade • Lab Tested</span>
           </div>
 
           {/* Main Headline */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-charcoal-900 mb-6 leading-tight tracking-tight drop-shadow-sm">
             Reject Average. <br className="hidden md:block" />
-            <span className="text-blush-600">
+            <span className="text-blush-800">
               Reveal Your Radiance.
             </span>
           </h1>

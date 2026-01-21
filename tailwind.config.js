@@ -13,17 +13,17 @@ export default {
 
         // Primary - Glow Purple
         'blush': {
-          DEFAULT: '#7A28CB', // Main Purple
+          DEFAULT: '#c2b1de', // User provided violet
           50: '#F5F3FF',
           100: '#EDE9FE',
           200: '#DDD6FE',
           300: '#C4B5FD',
           400: '#A78BFA',
-          500: '#8B5CF6',
-          600: '#7A28CB', // Primary Brand Color
-          700: '#6D28D9',
-          800: '#5B21B6',
-          900: '#4C1D95',
+          500: '#c2b1de',
+          600: '#c2b1de', // Primary Brand Color
+          700: '#8572a1', // Darker for hover
+          800: '#62507a', // Darker for text
+          900: '#423257', // Deepest
         },
 
         // Accent - Glow Teal

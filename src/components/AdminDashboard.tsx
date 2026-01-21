@@ -481,8 +481,8 @@ const AdminDashboard: React.FC = () => {
           <div className="text-center mb-6">
             <div className="mx-auto mb-4">
               <img
-                src="/glow-logo.jpg"
-                alt="Glow with Joo"
+                src="/logo.png"
+                alt="Slender Glow"
                 className="h-14 w-auto mx-auto object-contain"
               />
             </div>

@@ -163,6 +163,15 @@ const ProtocolGuide: React.FC = () => {
 
                                 {expandedProtocol === protocol.id && (
                                     <div className="px-5 pb-5 border-t border-blush-100">
+                                        {protocol.image_url && (
+                                            <div className="mt-4 mb-4">
+                                                <img
+                                                    src={protocol.image_url}
+                                                    alt={`${protocol.name} Guide`}
+                                                    className="w-full h-auto rounded-xl border border-blush-200 shadow-sm"
+                                                />
+                                            </div>
+                                        )}
                                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 mb-4">
                                             <div className="bg-blush-50 rounded-xl p-3">
                                                 <p className="text-xs text-charcoal-500 uppercase tracking-wider">Dosage</p>
