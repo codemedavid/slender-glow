@@ -90,6 +90,7 @@ export interface SiteSettings {
   hero_tagline?: string;
   hero_description?: string;
   hero_accent_color?: string;
+  coa_page_enabled?: string;
 }
 
 // Cart Types

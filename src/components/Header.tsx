@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ShoppingCart, Menu, X, FlaskConical, HelpCircle, Truck, Calculator } from 'lucide-react';
+import { ShoppingCart, Menu, X, FlaskConical, HelpCircle, Truck, Calculator, Shield } from 'lucide-react';
+import { useSiteSettings } from '../hooks/useSiteSettings';
 
 interface HeaderProps {
   cartItemsCount: number;
@@ -9,6 +10,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClick }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { siteSettings } = useSiteSettings();
 
   return (
     <>
@@ -21,12 +23,12 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               className="flex items-center hover:opacity-90 transition-opacity"
             >
               <img
-                src="/logo.png"
-                alt="Slender Glow"
+                src={siteSettings?.site_logo || "/logo.png"}
+                alt={siteSettings?.site_name || "SlenderGlow"}
                 className="h-10 sm:h-12 w-auto object-contain rounded-lg"
               />
               <span className="ml-3 text-lg sm:text-xl font-heading font-bold text-blush-800 tracking-tight">
-                Slender Glow
+                {siteSettings?.site_name || "SlenderGlow"}
               </span>
             </button>
 
@@ -48,6 +50,17 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                   <Calculator className="w-4 h-4" />
                   Calculator
                 </a>
+
+                {siteSettings?.coa_page_enabled === 'true' && (
+                  <a
+                    href="/coa"
+                    className="text-sm font-medium text-charcoal-600 hover:text-blush-600 px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
+                  >
+                    <Shield className="w-4 h-4" />
+                    Lab Reports
+                  </a>
+                )}
+
                 <a
                   href="/protocols"
                   className="text-sm font-medium text-charcoal-600 hover:text-blush-600 px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
@@ -120,11 +133,11 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               <div className="flex items-center gap-3">
                 <img
                   src="/logo.png"
-                  alt="Slender Glow"
+                  alt="SlenderGlow"
                   className="h-8 w-auto object-contain rounded-md"
                 />
                 <span className="text-lg font-heading font-bold text-blush-600">
-                  Slender Glow
+                  SlenderGlow
                 </span>
               </div>
               <button
@@ -170,6 +183,18 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
                   </div>
                   Protocols
                 </a>
+
+                {siteSettings?.coa_page_enabled === 'true' && (
+                  <a
+                    href="/coa"
+                    className="flex items-center gap-3 p-4 rounded-xl text-left font-medium text-charcoal-800 hover:bg-blush-50 transition-colors"
+                  >
+                    <div className="p-2 rounded-lg bg-blush-50 text-blush-600">
+                      <Shield className="w-[18px] h-[18px]" />
+                    </div>
+                    Lab Reports
+                  </a>
+                )}
 
                 <a
                   href="/track-order"

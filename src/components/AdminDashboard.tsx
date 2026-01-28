@@ -482,7 +482,7 @@ const AdminDashboard: React.FC = () => {
             <div className="mx-auto mb-4">
               <img
                 src="/logo.png"
-                alt="Slender Glow"
+                alt="SlenderGlow"
                 className="h-14 w-auto mx-auto object-contain"
               />
             </div>

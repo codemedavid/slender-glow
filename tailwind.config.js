@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Glow with Joo - Purple Theme
+        // SlenderGlow - Purple Theme
         'theme-bg': '#FFFFFF',           // Pure White
         'theme-text': '#4A4A4A',         // Soft Charcoal
 
