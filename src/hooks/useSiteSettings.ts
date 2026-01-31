@@ -26,7 +26,7 @@ export const useSiteSettings = () => {
       const dbSiteName = settingsData.find(s => s.id === 'site_name')?.value;
       const dbSiteLogo = settingsData.find(s => s.id === 'site_logo')?.value;
 
-      const effectiveSiteName = (dbSiteName === 'RSPEPTIDE' || dbSiteName === 'Peptide Pulse') ? 'Slender Glow' : (dbSiteName || 'Slender Glow');
+      const effectiveSiteName = (dbSiteName?.toLowerCase().includes('peptide') || dbSiteName === 'RSPEPTIDE') ? 'Slender Glow' : (dbSiteName || 'Slender Glow');
       const effectiveSiteLogo = (dbSiteLogo === '/rs-peptides-logo.png' || dbSiteLogo?.includes('peptide')) ? '/logo.png' : (dbSiteLogo || '/logo.png');
 
       const settings: SiteSettings = {
