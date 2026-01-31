@@ -1380,8 +1380,8 @@ const AdminDashboard: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <div className="h-10 flex items-center">
                   <img
-                    src="/glow-logo.jpg"
-                    alt="Glow with Joo"
+                    src="/logo.png"
+                    alt="Slender Glow"
                     className="h-10 w-auto object-contain"
                   />
                 </div>

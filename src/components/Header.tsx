@@ -23,12 +23,12 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
               className="flex items-center hover:opacity-90 transition-opacity"
             >
               <img
-                src={siteSettings?.site_logo || "/logo.png"}
-                alt={siteSettings?.site_name || "SlenderGlow"}
+                src="/logo.png"
+                alt="Slender Glow"
                 className="h-10 sm:h-12 w-auto object-contain rounded-lg"
               />
               <span className="ml-3 text-lg sm:text-xl font-heading font-bold text-blush-800 tracking-tight">
-                {siteSettings?.site_name || "SlenderGlow"}
+                "Slender Glow"
               </span>
             </button>
 
